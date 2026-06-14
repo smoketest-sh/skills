@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "generatedAt": "2026-06-14T00:00:00.000Z",
+  "baseUrl": "https://example.com",
+  "project": "Production",
+  "subflows": [
+    {
+      "name": "Log in",
+      "file": "subflows/login.md",
+      "action": "update",
+      "confidence": "high",
+      "evidence": {
+        "browser": [],
+        "code": ["apps/web/app/login/page.tsx changed the post-login redirect."]
+      },
+      "notes": []
+    }
+  ],
+  "candidates": [
+    {
+      "name": "Pricing annual toggle",
+      "file": "flows/pricing-annual-toggle.md",
+      "startUrl": "https://example.com/pricing",
+      "device": "both",
+      "scope": "public",
+      "action": "create",
+      "confidence": "high",
+      "environment": null,
+      "evidence": {
+        "browser": [],
+        "code": [
+          "apps/web/app/pricing/page.tsx added an annual billing toggle.",
+          "tests/e2e/pricing.spec.ts expects annual prices."
+        ]
+      },
+      "notes": []
+    },
+    {
+      "name": "Billing settings",
+      "file": "flows/billing-settings.md",
+      "startUrl": "https://example.com/dashboard/billing",
+      "device": "both",
+      "scope": "authenticated",
+      "action": "update",
+      "confidence": "medium",
+      "environment": "staging",
+      "evidence": {
+        "browser": [],
+        "code": [
+          "apps/web/app/dashboard/billing/page.tsx added invoice downloads.",
+          "tests/e2e/billing.spec.ts covers invoice history."
+        ]
+      },
+      "notes": []
+    }
+  ]
+}

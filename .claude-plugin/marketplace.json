@@ -1,6 +1,6 @@
 {
   "name": "smoketest",
-  "description": "Smoketest plugins for discovering web app user flows and creating browser tests from local code, browser exploration, and authenticated environments.",
+  "description": "Smoketest plugins for discovering web app user flows and creating browser tests from local code, browser exploration, git changes, and authenticated environments.",
   "owner": {
     "name": "Smoketest",
     "url": "https://smoketest.sh"
@@ -10,8 +10,8 @@
       "name": "smoketest",
       "displayName": "Smoketest",
       "source": "./",
-      "description": "Discover web app user flows and generate reviewable Smoketest flows from local code, browser exploration, and authenticated environments.",
-      "version": "0.1.2",
+      "description": "Discover web app user flows and generate reviewable Smoketest flows from local code, browser exploration, git changes, and authenticated environments.",
+      "version": "0.2.0",
       "author": {
         "name": "Smoketest",
         "url": "https://smoketest.sh"

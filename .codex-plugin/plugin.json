@@ -1,7 +1,7 @@
 {
   "name": "smoketest",
-  "version": "0.1.2",
-  "description": "Discover web app user flows and generate reviewable Smoketest flows from local code, browser exploration, and authenticated environments.",
+  "version": "0.2.0",
+  "description": "Discover web app user flows and generate reviewable Smoketest flows from local code, browser exploration, git changes, and authenticated environments.",
   "author": {
     "name": "Smoketest",
     "url": "https://smoketest.sh"
@@ -20,8 +20,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Smoketest",
-    "shortDescription": "Discover user flows and draft Smoketest tests.",
-    "longDescription": "Use browser exploration and code analysis to discover public and authenticated web app user flows, draft reviewable Smoketest flow markdown, and apply approved flows through the Smoketest CLI.",
+    "shortDescription": "Discover and sync Smoketest browser flows.",
+    "longDescription": "Use browser exploration, code analysis, and git change review to discover public and authenticated web app user flows, draft reviewable Smoketest flow markdown, and apply approved flows through the Smoketest CLI.",
     "developerName": "Smoketest",
     "category": "Developer Tools",
     "capabilities": [
@@ -32,6 +32,7 @@
     "websiteURL": "https://github.com/smoketest-sh/skills",
     "defaultPrompt": [
       "Use Smoketest to discover browser flows from this repo.",
+      "Use Smoketest to sync flow updates from this branch.",
       "Draft Smoketest flows for this URL and codebase.",
       "Apply approved Smoketest flow drafts with the CLI."
     ]

@@ -1,0 +1,60 @@
+{
+  "skill_name": "smoketest-changes",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Use smoketest-changes to sync flows from this branch.",
+      "expected_output": "Should first check that the Smoketest CLI is installed and authenticated, helping the user install @smoketest.sh/cli and run smoketest auth login or smoketest init if needed. After CLI setup succeeds, it should inspect existing Smoketest projects, flows, subflows, and environments, collect git changes against origin/main or main plus working tree changes, inspect changed route/UI/test/doc files, draft .smoketest/changes/manifest.json and flow markdown, validate and dry-run the manifest, include a short contextual dashboard tip, and ask before CLI mutation.",
+      "assertions": [
+        "Checks Smoketest CLI install and auth before change analysis",
+        "Uses branch diff against origin/main or main by default",
+        "Includes staged, unstaged, and untracked relevant files",
+        "Creates draft artifacts under .smoketest/changes",
+        "Validates and dry-runs before apply",
+        "Mentions a relevant Smoketest web dashboard surface",
+        "Asks before CLI mutation"
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Use smoketest-changes for origin/main...HEAD and update existing Smoketest coverage.",
+      "expected_output": "Should use the explicit git range, inspect current Smoketest flows through the CLI, choose update only for exact-name matches, choose create for newly discovered journeys, skip near duplicates, and ask before applying any create/update actions.",
+      "assertions": [
+        "Uses explicit git range",
+        "Inspects existing Smoketest flows",
+        "Uses exact-name matching for updates",
+        "Avoids duplicate near matches",
+        "Requires approval before apply"
+      ],
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Recent changes removed a product route. Use smoketest-changes.",
+      "expected_output": "Should report removed routes as possible stale Smoketest coverage, use skip for any deleted journey candidate, avoid deleting Smoketest resources, and ask whether the user wants separate cleanup guidance.",
+      "assertions": [
+        "Detects deleted route impact",
+        "Marks stale coverage as skip",
+        "Does not delete Smoketest resources",
+        "Separates cleanup guidance from flow apply"
+      ],
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "Use smoketest-changes for changed authenticated dashboard flows.",
+      "expected_output": "Should require installed and authenticated CLI before environment work, select or create a Smoketest environment, store passwords only through masked CLI prompts such as smoketest env set <env> TEST_USER_PASSWORD --secret, draft or update a login subflow when needed, attach environment to authenticated candidates, mention dashboard environment or authenticated run review surfaces when relevant, and ask before applying.",
+      "assertions": [
+        "Requires CLI auth before environment setup",
+        "Uses Smoketest environments for credentials",
+        "Never asks for passwords in chat",
+        "Drafts reusable login setup when useful",
+        "Attaches environment to authenticated flows",
+        "Mentions dashboard environment or authenticated run review surfaces",
+        "Asks before applying"
+      ],
+      "files": []
+    }
+  ]
+}

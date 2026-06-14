@@ -11,6 +11,8 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -18,10 +20,19 @@ jobs:
         run: |
           node --check skills/smoketest-explore/scripts/validate-manifest.mjs
           node --check skills/smoketest-explore/scripts/apply-manifest.mjs
+          node --check skills/smoketest-changes/scripts/validate-manifest.mjs
+          node --check skills/smoketest-changes/scripts/apply-manifest.mjs
+          node --check skills/smoketest-changes/scripts/collect-changes.mjs
       - name: Validate fixture manifest
-        run: node skills/smoketest-explore/scripts/validate-manifest.mjs test/fixtures/explore/manifest.json
+        run: |
+          node skills/smoketest-explore/scripts/validate-manifest.mjs test/fixtures/explore/manifest.json
+          node skills/smoketest-changes/scripts/validate-manifest.mjs test/fixtures/changes/manifest.json
       - name: Dry-run fixture apply
-        run: node skills/smoketest-explore/scripts/apply-manifest.mjs test/fixtures/explore/manifest.json --project Production
+        run: |
+          node skills/smoketest-explore/scripts/apply-manifest.mjs test/fixtures/explore/manifest.json --project Production
+          node skills/smoketest-changes/scripts/apply-manifest.mjs test/fixtures/changes/manifest.json --project Production
+      - name: Collect git change evidence
+        run: node skills/smoketest-changes/scripts/collect-changes.mjs --base HEAD~1 --json
       - name: Validate skill package
         run: npx --yes skills add . --list
       - name: Validate plugin JSON

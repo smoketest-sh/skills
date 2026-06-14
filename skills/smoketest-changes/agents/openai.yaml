@@ -1,0 +1,4 @@
+interface:
+  display_name: "Smoketest Changes"
+  short_description: "Sync Smoketest flows from code changes"
+  default_prompt: "Use $smoketest-changes to detect changed user flows from this branch and draft Smoketest updates."

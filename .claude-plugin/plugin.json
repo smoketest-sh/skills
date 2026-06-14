@@ -1,8 +1,8 @@
 {
   "name": "smoketest",
   "displayName": "Smoketest",
-  "version": "0.1.2",
-  "description": "Discover web app user flows and generate reviewable Smoketest flows from local code, browser exploration, and authenticated environments.",
+  "version": "0.2.0",
+  "description": "Discover web app user flows and generate reviewable Smoketest flows from local code, browser exploration, git changes, and authenticated environments.",
   "author": {
     "name": "Smoketest",
     "url": "https://smoketest.sh"
