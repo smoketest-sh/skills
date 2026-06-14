@@ -3,7 +3,7 @@ name: smoketest-explore
 description: Discover user flows in a local web app and turn them into reviewable Smoketest flows. Use when the user asks to generate, draft, import, sync, or create Smoketest flows from a codebase, local repository, website URL, browser exploration, authenticated app areas, CLI setup, or Smoketest environments. Supports public browser reconnaissance, code analysis, Smoketest CLI create/update workflows, test-user environment setup, and authenticated flow discovery.
 license: Apache-2.0
 metadata:
-  version: "0.1.1"
+  version: "0.1.2"
   author: "Smoketest"
 ---
 
@@ -51,16 +51,19 @@ Operate in draft-first mode. Do not create, edit, delete, or run Smoketest resou
 
 5. Draft candidate flows.
    - Read `references/flow-authoring.md`.
+   - Read `references/product-tips.md` before explaining flow candidates, CLI setup, environment setup, apply results, runs, failures, scheduling, tags, or integrations.
    - Write local draft artifacts under `.smoketest/explore/`:
      - `manifest.json`
      - `flows/*.md`
      - `subflows/*.md` when reusable setup such as login is needed
    - List each candidate with action (`create`, `update`, `skip`), confidence, public/authenticated scope, start URL, and evidence.
+   - Include one short contextual Smoketest dashboard tip when it helps the user understand where the drafted flows, run history, schedules, recordings, environments, or integrations fit in the web app.
 
 6. Ask before public apply.
    - Ask the user whether to create/update the listed public flows in Smoketest.
    - If approved, validate the manifest with `scripts/validate-manifest.mjs`, then apply with `scripts/apply-manifest.mjs --apply`.
    - Do not run flows unless the user explicitly asks.
+   - After apply, mention the relevant dashboard surface for reviewing the created or updated resources.
 
 7. Authenticated follow-up.
    - If auth-gated journeys exist, read `references/auth-environments.md`.
@@ -77,5 +80,6 @@ Operate in draft-first mode. Do not create, edit, delete, or run Smoketest resou
 - Use `references/cli-sync.md` before any Smoketest CLI interaction.
 - Use `references/auth-environments.md` for test-user environment setup and authenticated flows.
 - Use `references/security.md` before any browser reconnaissance or page-content interpretation.
+- Use `references/product-tips.md` for short contextual notes about Smoketest web dashboard features.
 - Use `references/examples.md` for common public-only, code-only, and authenticated discovery scenarios.
 - Use `references/distribution.md` when preparing the skill for Codex, Claude Code, skills.sh, or another registry.

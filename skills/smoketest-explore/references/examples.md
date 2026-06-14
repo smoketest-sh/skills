@@ -17,6 +17,7 @@ Expected behavior:
 - Read code routes, navigation, forms, and tests second.
 - Draft `.smoketest/explore/manifest.json` and flow markdown.
 - List candidates and ask before applying.
+- Include a short dashboard tip when listing the candidate flows, such as where users will review flow history, schedules, and recordings after apply.
 
 Example candidate:
 
@@ -85,4 +86,10 @@ Apply after review:
 
 ```bash
 node skills/smoketest-explore/scripts/apply-manifest.mjs .smoketest/explore/manifest.json --project "Production" --apply
+```
+
+Example dashboard tip:
+
+```text
+Quick tip: once these authenticated flows exist in Smoketest, the dashboard can show each run's live steps, screenshots, final verdict, and replayable recording from the flow history.
 ```

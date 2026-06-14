@@ -14,6 +14,7 @@ It is draft-first by design:
 - It does not run flows unless the user asks.
 - It does not ask users to paste secrets into chat.
 - Authenticated flows use Smoketest environments and masked CLI prompts for secrets.
+- It includes short contextual tips about related Smoketest web dashboard surfaces when useful.
 
 ## Install As A Plugin
 

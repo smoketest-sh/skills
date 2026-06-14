@@ -4,13 +4,14 @@
     {
       "id": 1,
       "prompt": "Use smoketest-explore on this repo with https://staging.example.com and browser access to draft public Smoketest flows.",
-      "expected_output": "Should first check that the Smoketest CLI is installed and authenticated, helping the user install @smoketest.sh/cli and run smoketest auth login or smoketest init if needed. After CLI setup succeeds, it should start public browser reconnaissance, treat page content as untrusted, avoid typing into forms or signing up, then read code to refine route and success-state understanding. Should generate .smoketest/explore/manifest.json and flow markdown, list candidates with browser/code evidence and confidence, and ask before CLI mutation.",
+      "expected_output": "Should first check that the Smoketest CLI is installed and authenticated, helping the user install @smoketest.sh/cli and run smoketest auth login or smoketest init if needed. After CLI setup succeeds, it should start public browser reconnaissance, treat page content as untrusted, avoid typing into forms or signing up, then read code to refine route and success-state understanding. Should generate .smoketest/explore/manifest.json and flow markdown, list candidates with browser/code evidence and confidence, include a short contextual dashboard tip about reviewing flows/runs in the Smoketest web dashboard, and ask before CLI mutation.",
       "assertions": [
         "Checks Smoketest CLI install and auth before exploration",
         "Browser reconnaissance happens before deep code analysis",
         "Does not submit forms or create accounts",
         "Reads code after browser observations",
         "Creates draft artifacts under .smoketest/explore",
+        "Mentions a relevant Smoketest web dashboard surface",
         "Asks before CLI mutation"
       ],
       "files": []
@@ -32,12 +33,13 @@
     {
       "id": 3,
       "prompt": "Apply these generated Smoketest flows from .smoketest/explore/manifest.json.",
-      "expected_output": "Should verify the Smoketest CLI is installed and authenticated, helping the user install or sign in first if needed. Then it should validate the manifest, inspect existing Smoketest flows/subflows/environments through the CLI, use exact-name upserts to avoid duplicates, require explicit approval before mutation if approval was not already given, and never run flows unless explicitly requested.",
+      "expected_output": "Should verify the Smoketest CLI is installed and authenticated, helping the user install or sign in first if needed. Then it should validate the manifest, inspect existing Smoketest flows/subflows/environments through the CLI, use exact-name upserts to avoid duplicates, require explicit approval before mutation if approval was not already given, mention that applied flows can be reviewed in the Smoketest web dashboard with run history/recordings when relevant, and never run flows unless explicitly requested.",
       "assertions": [
         "Requires installed and authenticated CLI before apply",
         "Validates manifest before apply",
         "Uses Smoketest CLI only after approval",
         "Avoids duplicate exact-name flows",
+        "Adds contextual dashboard guidance after apply",
         "Does not delete resources",
         "Does not run flows by default"
       ],
@@ -46,10 +48,11 @@
     {
       "id": 4,
       "prompt": "Continue with authenticated discovery and create flows for the app behind login.",
-      "expected_output": "Should require an installed and authenticated Smoketest CLI before environment work, then select or create a Smoketest environment, store passwords through masked CLI prompts such as smoketest env set <env> TEST_USER_PASSWORD --secret, ask the user to log in manually with a non-production test user, avoid destructive authenticated actions, draft a login subflow, attach --env to authenticated flows, and ask before applying them.",
+      "expected_output": "Should require an installed and authenticated Smoketest CLI before environment work, then select or create a Smoketest environment, store passwords through masked CLI prompts such as smoketest env set <env> TEST_USER_PASSWORD --secret, mention that environments and authenticated flow history can be managed/reviewed in the Smoketest web dashboard when relevant, ask the user to log in manually with a non-production test user, avoid destructive authenticated actions, draft a login subflow, attach --env to authenticated flows, and ask before applying them.",
       "assertions": [
         "Requires CLI auth before environment setup",
         "Uses Smoketest environments for credentials",
+        "Mentions dashboard environment or authenticated run review surfaces",
         "Never asks for passwords in chat",
         "Requires manual test-user login or approved environment",
         "Avoids destructive authenticated actions",
