@@ -12,6 +12,7 @@ Use $smoketest-explore to discover public user flows from this repo and https://
 
 Expected behavior:
 
+- Check that `smoketest` is installed and signed in before exploration. If not, help install `@smoketest.sh/cli` and run `smoketest auth login` or `smoketest init` before continuing.
 - Inspect the live site first if browser access is available.
 - Read code routes, navigation, forms, and tests second.
 - Draft `.smoketest/explore/manifest.json` and flow markdown.
@@ -37,6 +38,7 @@ Use $smoketest-explore without browser access to draft Smoketest flows from the 
 
 Expected behavior:
 
+- Check CLI setup first. If unavailable and the user chooses draft-only mode, continue without CLI coverage checks.
 - Skip browser reconnaissance.
 - Read routes, tests, docs, app shell navigation, auth guards, and forms.
 - Label browser evidence as absent in the manifest.
@@ -62,6 +64,7 @@ Use $smoketest-explore to continue with authenticated flow discovery using the s
 Expected behavior:
 
 - Read `references/auth-environments.md` and `references/security.md`.
+- Require working Smoketest CLI auth before selecting or creating environments.
 - Confirm or create a Smoketest environment.
 - Store `TEST_USER_PASSWORD` through a masked CLI prompt.
 - Ask the user to log in manually with the non-production test user.

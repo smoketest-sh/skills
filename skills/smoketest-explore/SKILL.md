@@ -3,7 +3,7 @@ name: smoketest-explore
 description: Discover user flows in a local web app and turn them into reviewable Smoketest flows. Use when the user asks to generate, draft, import, sync, or create Smoketest flows from a codebase, local repository, website URL, browser exploration, authenticated app areas, CLI setup, or Smoketest environments. Supports public browser reconnaissance, code analysis, Smoketest CLI create/update workflows, test-user environment setup, and authenticated flow discovery.
 license: Apache-2.0
 metadata:
-  version: "0.1.0"
+  version: "0.1.1"
   author: "Smoketest"
 ---
 
@@ -17,7 +17,8 @@ Operate in draft-first mode. Do not create, edit, delete, or run Smoketest resou
 
 - Requires local repository access.
 - Browser access is optional; use it only when a URL is provided and the user has allowed browser exploration.
-- Smoketest CLI access is optional for drafting and required for create/update/apply.
+- Smoketest CLI access is expected at preflight for the full workflow and required for create/update/apply.
+- If the CLI is missing or unauthenticated, pause to help the user install and sign in before continuing. Continue draft-only without CLI only when the user explicitly chooses that fallback.
 - Published skill package license: Apache-2.0. See `license.txt`.
 
 ## Workflow
@@ -26,12 +27,15 @@ Operate in draft-first mode. Do not create, edit, delete, or run Smoketest resou
    - Identify the app framework, package manager, likely app roots, and route conventions.
    - Capture the target URL if provided.
    - Check whether browser tools are available and explicitly allowed.
-   - Check whether `smoketest` CLI is available only before an apply phase.
+   - Read `references/cli-sync.md`.
+   - Check whether `smoketest` CLI is installed and whether `smoketest auth whoami --json` succeeds before browser or code reconnaissance.
+   - If the CLI is missing, help the user install `@smoketest.sh/cli`, sign in, and rerun the checks. Do not ask for API keys or passwords in chat.
+   - If the user declines CLI setup, ask whether to continue in draft-only mode. In draft-only mode, skip CLI coverage/environment checks and label apply/auth environment setup as blocked by CLI setup.
 
 2. Existing Smoketest coverage.
-   - If CLI apply may be used, inspect existing projects, flows, subflows, and environments before proposing create/update actions.
+   - After CLI auth succeeds, inspect existing projects, flows, subflows, and environments before proposing create/update actions.
    - Prefer existing flow names and subflows over duplicates.
-   - Read `references/cli-sync.md` before using the CLI.
+   - If no project is selected or provided, use CLI defaults only when they resolve cleanly; otherwise ask for a project name or ID.
 
 3. Public browser reconnaissance.
    - Read `references/security.md` before using browser or live-site content.

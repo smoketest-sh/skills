@@ -88,7 +88,8 @@ Use $smoketest-explore to continue with authenticated flow discovery using the s
 
 - Local repository access.
 - Optional browser access for browser-first exploration.
-- Optional Smoketest CLI for applying approved drafts.
+- Smoketest CLI installed and signed in for the full workflow. The skill checks this upfront and helps the user install `@smoketest.sh/cli` and run `smoketest auth login` or `smoketest init` if needed.
+- Draft-only mode can continue without CLI setup only when the user explicitly chooses that fallback.
 - A Smoketest environment for authenticated flows.
 
 ## Draft And Apply

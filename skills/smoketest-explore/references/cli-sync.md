@@ -1,6 +1,6 @@
 # CLI Sync
 
-Use this reference before any Smoketest CLI interaction. Drafting does not require the CLI; create/update/apply does.
+Use this reference before any Smoketest CLI interaction. The full explore workflow starts by checking CLI availability and authentication. Draft-only discovery can proceed without the CLI only when the user explicitly chooses that fallback; create/update/apply always requires the CLI.
 
 ## Safety Rules
 
@@ -33,12 +33,48 @@ node skills/smoketest-explore/scripts/apply-manifest.mjs .smoketest/explore/mani
 
 The apply script performs exact-name upserts to avoid duplicate flows and subflows. It creates missing resources and updates existing exact-name matches.
 
-## Preflight Commands
+## CLI Setup Gate
 
-Check the CLI and active identity:
+Run this gate before browser or code reconnaissance:
 
 ```bash
-smoketest auth whoami
+command -v smoketest
+smoketest --version
+smoketest auth whoami --json
+```
+
+If `command -v smoketest` fails, pause and help the user install the CLI. Prefer a global install so later `smoketest` commands and `scripts/apply-manifest.mjs` work without extra wrappers:
+
+```bash
+npm install --global @smoketest.sh/cli
+smoketest init
+```
+
+If the user only wants a one-shot setup command, offer:
+
+```bash
+npx @smoketest.sh/cli init
+```
+
+After any one-shot setup, still recheck `command -v smoketest`. If the binary is not on `PATH`, explain that full apply/sync steps need the installed `smoketest` command and ask whether to install globally or continue draft-only.
+
+If the CLI is installed but `smoketest auth whoami --json` fails, help the user sign in:
+
+```bash
+smoketest auth login
+smoketest auth whoami --json
+```
+
+For local use, prefer the interactive `smoketest auth login` prompt. Do not ask the user to paste API keys into chat; if they choose API-key auth, let the CLI collect it through its prompt or documented masked path.
+
+Continue the workflow only after `smoketest auth whoami --json` succeeds, unless the user explicitly chooses draft-only mode.
+
+## Preflight Commands
+
+After the setup gate succeeds, inspect the active workspace and projects:
+
+```bash
+smoketest auth whoami --json
 smoketest projects list --json
 ```
 

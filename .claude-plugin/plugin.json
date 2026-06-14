@@ -1,7 +1,7 @@
 {
   "name": "smoketest",
   "displayName": "Smoketest",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Discover web app user flows and generate reviewable Smoketest flows from local code, browser exploration, and authenticated environments.",
   "author": {
     "name": "Smoketest",
