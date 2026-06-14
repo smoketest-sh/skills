@@ -20,14 +20,14 @@ It is draft-first by design:
 Install from this repository after it is published:
 
 ```bash
-npx skills add smoketest-sh/smoketest-skills
+npx skills add sayfun-studio/smoketest-skills
 ```
 
 With GitHub CLI agent skills:
 
 ```bash
-gh skill install smoketest-sh/smoketest-skills smoketest-explore --agent codex
-gh skill install smoketest-sh/smoketest-skills smoketest-explore --agent claude-code
+gh skill install sayfun-studio/smoketest-skills smoketest-explore --agent codex
+gh skill install sayfun-studio/smoketest-skills smoketest-explore --agent claude-code
 ```
 
 For local development, copy or symlink `skills/smoketest-explore` into the agent host skill folder:
@@ -63,11 +63,32 @@ Use $smoketest-explore to continue with authenticated flow discovery using the s
 - Optional Smoketest CLI for applying approved drafts.
 - A Smoketest environment for authenticated flows.
 
+## Draft And Apply
+
+Validate generated draft manifests:
+
+```bash
+node skills/smoketest-explore/scripts/validate-manifest.mjs .smoketest/explore/manifest.json
+```
+
+Preview CLI changes without mutation:
+
+```bash
+node skills/smoketest-explore/scripts/apply-manifest.mjs .smoketest/explore/manifest.json --project "Production"
+```
+
+Apply after review:
+
+```bash
+node skills/smoketest-explore/scripts/apply-manifest.mjs .smoketest/explore/manifest.json --project "Production" --apply
+```
+
 ## Validate
 
 ```bash
 uv run --with pyyaml python /Users/armin/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/smoketest-explore
 gh skill publish --dry-run
+node skills/smoketest-explore/scripts/validate-manifest.mjs test/fixtures/explore/manifest.json
 ```
 
 ## License

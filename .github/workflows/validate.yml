@@ -1,0 +1,28 @@
+name: Validate
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check scripts
+        run: |
+          node --check skills/smoketest-explore/scripts/validate-manifest.mjs
+          node --check skills/smoketest-explore/scripts/apply-manifest.mjs
+      - name: Validate fixture manifest
+        run: node skills/smoketest-explore/scripts/validate-manifest.mjs test/fixtures/explore/manifest.json
+      - name: Dry-run fixture apply
+        run: node skills/smoketest-explore/scripts/apply-manifest.mjs test/fixtures/explore/manifest.json --project Production
+      - name: Validate skill package
+        run: gh skill publish --dry-run
+        env:
+          GH_TOKEN: ${{ github.token }}

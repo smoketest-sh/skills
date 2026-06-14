@@ -11,6 +11,28 @@ Use this reference before any Smoketest CLI interaction. Drafting does not requi
 - Use `--description @file` for generated flow markdown.
 - Do not pass secret values in command arguments unless the user explicitly chooses automation; prefer masked prompts.
 
+## Manifest Scripts
+
+Validate generated drafts:
+
+```bash
+node skills/smoketest-explore/scripts/validate-manifest.mjs .smoketest/explore/manifest.json
+```
+
+Preview CLI changes without mutation:
+
+```bash
+node skills/smoketest-explore/scripts/apply-manifest.mjs .smoketest/explore/manifest.json --project "<project>"
+```
+
+Apply after explicit user approval:
+
+```bash
+node skills/smoketest-explore/scripts/apply-manifest.mjs .smoketest/explore/manifest.json --project "<project>" --apply
+```
+
+The apply script performs exact-name upserts to avoid duplicate flows and subflows. It creates missing resources and updates existing exact-name matches.
+
 ## Preflight Commands
 
 Check the CLI and active identity:

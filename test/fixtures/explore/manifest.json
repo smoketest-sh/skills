@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "generatedAt": "2026-06-14T00:00:00.000Z",
+  "baseUrl": "https://example.com",
+  "project": "Production",
+  "subflows": [
+    {
+      "name": "Log in",
+      "file": "subflows/login.md",
+      "action": "create",
+      "confidence": "high",
+      "evidence": {
+        "browser": ["The login page shows email and password fields."],
+        "code": ["Auth route redirects authenticated users to /dashboard."]
+      },
+      "notes": []
+    }
+  ],
+  "candidates": [
+    {
+      "name": "Homepage to pricing",
+      "file": "flows/homepage-pricing.md",
+      "startUrl": "https://example.com",
+      "device": "both",
+      "scope": "public",
+      "action": "create",
+      "confidence": "high",
+      "environment": null,
+      "evidence": {
+        "browser": ["Homepage navigation exposes Pricing."],
+        "code": ["Route file confirms /pricing exists."]
+      },
+      "notes": []
+    },
+    {
+      "name": "Dashboard overview",
+      "file": "flows/dashboard-overview.md",
+      "startUrl": "https://example.com/login",
+      "device": "both",
+      "scope": "authenticated",
+      "action": "create",
+      "confidence": "medium",
+      "environment": "staging",
+      "evidence": {
+        "browser": ["Authenticated navigation exposes Dashboard."],
+        "code": ["Dashboard route renders overview content."]
+      },
+      "notes": []
+    }
+  ]
+}

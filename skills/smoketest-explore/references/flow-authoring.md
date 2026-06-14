@@ -27,6 +27,12 @@ Create draft artifacts relative to the repository root:
 
 Use stable lowercase hyphenated filenames. Avoid secrets in all generated files.
 
+Validate the manifest before applying:
+
+```bash
+node skills/smoketest-explore/scripts/validate-manifest.mjs .smoketest/explore/manifest.json
+```
+
 ## Manifest Shape
 
 Use this JSON shape for `manifest.json`:
@@ -37,6 +43,19 @@ Use this JSON shape for `manifest.json`:
   "generatedAt": "2026-06-14T00:00:00.000Z",
   "baseUrl": "https://example.com",
   "project": "Production",
+  "subflows": [
+    {
+      "name": "Log in",
+      "file": "subflows/login.md",
+      "action": "create",
+      "confidence": "high",
+      "evidence": {
+        "browser": ["Login page has email and password fields."],
+        "code": ["Auth route redirects to /dashboard after login."]
+      },
+      "notes": []
+    }
+  ],
   "candidates": [
     {
       "name": "Homepage to pricing",
@@ -63,6 +82,14 @@ Allowed values:
 - `scope`: `public` or `authenticated`
 - `action`: `create`, `update`, or `skip`
 - `confidence`: `high`, `medium`, or `low`
+
+Use `subflows` only for reusable setup such as login. Flow markdown can reference a subflow placeholder:
+
+```markdown
+{{smoketest-subflow:Log in}}
+```
+
+`scripts/apply-manifest.mjs` converts that placeholder into a stable Smoketest subflow chip after the subflow exists.
 
 ## Flow Markdown Rules
 

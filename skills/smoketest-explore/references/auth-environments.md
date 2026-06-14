@@ -75,7 +75,7 @@ For protected journeys:
 ```markdown
 ## Dashboard overview
 
-- Log in with the test user from the attached environment.
+- {{smoketest-subflow:Log in}}
 - Open the dashboard.
 - Verify the overview cards, recent runs, and navigation are visible.
 ```

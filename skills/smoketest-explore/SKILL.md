@@ -34,6 +34,7 @@ Operate in draft-first mode. Do not create, edit, delete, or run Smoketest resou
    - Read `references/cli-sync.md` before using the CLI.
 
 3. Public browser reconnaissance.
+   - Read `references/security.md` before using browser or live-site content.
    - If URL plus browser access are available, inspect the website before deep code analysis.
    - Stay on allowed domains and public pages.
    - Do not log in, sign up, type into forms, submit forms, enter checkout, or perform destructive actions.
@@ -54,7 +55,7 @@ Operate in draft-first mode. Do not create, edit, delete, or run Smoketest resou
 
 6. Ask before public apply.
    - Ask the user whether to create/update the listed public flows in Smoketest.
-   - If approved, use the Smoketest CLI with `--description @file` and `--json` where possible.
+   - If approved, validate the manifest with `scripts/validate-manifest.mjs`, then apply with `scripts/apply-manifest.mjs --apply`.
    - Do not run flows unless the user explicitly asks.
 
 7. Authenticated follow-up.
@@ -71,4 +72,6 @@ Operate in draft-first mode. Do not create, edit, delete, or run Smoketest resou
 - Use `references/flow-authoring.md` for candidate quality, manifest shape, and markdown flow rules.
 - Use `references/cli-sync.md` before any Smoketest CLI interaction.
 - Use `references/auth-environments.md` for test-user environment setup and authenticated flows.
+- Use `references/security.md` before any browser reconnaissance or page-content interpretation.
+- Use `references/examples.md` for common public-only, code-only, and authenticated discovery scenarios.
 - Use `references/distribution.md` when preparing the skill for Codex, Claude Code, skills.sh, or another registry.
