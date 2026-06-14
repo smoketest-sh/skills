@@ -1,6 +1,6 @@
 # Distribution
 
-Use this reference when preparing `smoketest-explore` for local use or public registries.
+Use this reference when preparing `smoketest-explore` for local use, plugin marketplaces, or public registries.
 
 ## Canonical Layout
 
@@ -15,6 +15,35 @@ skills/smoketest-explore/
 ```
 
 Keep generated exploration output outside the skill package under `.smoketest/explore/`.
+
+## Plugin Layout
+
+The repository root is also the plugin root. Keep both plugin manifests at the root:
+
+```text
+.codex-plugin/plugin.json
+.claude-plugin/plugin.json
+.agents/plugins/marketplace.json
+.claude-plugin/marketplace.json
+skills/smoketest-explore/
+```
+
+Use plugin name `smoketest` and marketplace name `smoketest`. The packaged skill remains
+`smoketest-explore`, so Claude Code exposes it as `/smoketest:smoketest-explore`.
+
+For Codex distribution:
+
+```bash
+codex plugin marketplace add smoketest-sh/skills
+codex plugin add smoketest@smoketest
+```
+
+For Claude Code distribution:
+
+```text
+/plugin marketplace add smoketest-sh/skills
+/plugin install smoketest@smoketest
+```
 
 ## Local Discovery
 
@@ -33,14 +62,15 @@ For local development from a sibling checkout such as `../smoketest-skills`, poi
 - Do not depend on product-specific tool names in required instructions.
 - Keep browser usage optional because not every agent host has browser tools.
 - Keep CLI usage optional for draft mode and required only for apply mode.
+- Keep plugin manifests aligned with the repository URL, version, license, and skill folder.
 - Add root registry metadata such as `skills.sh.json` later if a registry requires richer presentation than `README.md` and `SKILL.md`.
 
 ## Versioning
 
 When publishing, tag releases and document compatibility in release notes:
 
-- Codex: local `.agents/skills` or installed skill package
-- Claude Code: local `.claude/skills` or installed skill package
+- Codex: local `.agents/skills`, standalone skill package, or `smoketest@smoketest` plugin
+- Claude Code: local `.claude/skills`, standalone skill package, or `smoketest@smoketest` plugin
 - skills.sh: GitHub-backed skill install
 
 The skill package license is Apache-2.0.

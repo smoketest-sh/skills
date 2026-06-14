@@ -1,6 +1,6 @@
 # Smoketest Skills
 
-Agent Skills for discovering browser user flows and creating Smoketest tests.
+Agent Skills and plugin packaging for discovering browser user flows and creating Smoketest tests.
 
 ## Skills
 
@@ -15,19 +15,47 @@ It is draft-first by design:
 - It does not ask users to paste secrets into chat.
 - Authenticated flows use Smoketest environments and masked CLI prompts for secrets.
 
-## Install
+## Install As A Plugin
+
+### Codex
+
+Add the Smoketest marketplace and install the plugin:
+
+```bash
+codex plugin marketplace add smoketest-sh/skills
+codex plugin add smoketest@smoketest
+```
+
+The plugin exposes the `smoketest-explore` skill from `skills/smoketest-explore`.
+
+### Claude Code
+
+Add the Smoketest marketplace and install the plugin:
+
+```text
+/plugin marketplace add smoketest-sh/skills
+/plugin install smoketest@smoketest
+```
+
+After installation, the skill is available as:
+
+```text
+/smoketest:smoketest-explore
+```
+
+## Install As A Standalone Skill
 
 Install from this repository after it is published:
 
 ```bash
-npx skills add sayfun-studio/smoketest-skills
+npx skills add smoketest-sh/skills --skill smoketest-explore
 ```
 
 With GitHub CLI agent skills:
 
 ```bash
-gh skill install sayfun-studio/smoketest-skills smoketest-explore --agent codex
-gh skill install sayfun-studio/smoketest-skills smoketest-explore --agent claude-code
+gh skill install smoketest-sh/skills smoketest-explore --agent codex
+gh skill install smoketest-sh/skills smoketest-explore --agent claude-code
 ```
 
 For local development, copy or symlink `skills/smoketest-explore` into the agent host skill folder:
@@ -87,8 +115,10 @@ node skills/smoketest-explore/scripts/apply-manifest.mjs .smoketest/explore/mani
 
 ```bash
 uv run --with pyyaml python /Users/armin/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/smoketest-explore
-gh skill publish --dry-run
+npx --yes skills add . --list
+uv run --with pyyaml python /Users/armin/.codex/skills/.system/plugin-creator/scripts/validate_plugin.py .
 node skills/smoketest-explore/scripts/validate-manifest.mjs test/fixtures/explore/manifest.json
+claude plugin validate . # optional, requires Claude Code
 ```
 
 ## License

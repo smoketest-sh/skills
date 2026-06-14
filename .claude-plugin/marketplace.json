@@ -1,0 +1,39 @@
+{
+  "name": "smoketest",
+  "description": "Smoketest plugins for discovering web app user flows and creating browser tests from local code, browser exploration, and authenticated environments.",
+  "owner": {
+    "name": "Smoketest",
+    "url": "https://smoketest.sh"
+  },
+  "plugins": [
+    {
+      "name": "smoketest",
+      "displayName": "Smoketest",
+      "source": "./",
+      "description": "Discover web app user flows and generate reviewable Smoketest flows from local code, browser exploration, and authenticated environments.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Smoketest",
+        "url": "https://smoketest.sh"
+      },
+      "homepage": "https://github.com/smoketest-sh/skills",
+      "repository": "https://github.com/smoketest-sh/skills",
+      "license": "Apache-2.0",
+      "keywords": [
+        "smoketest",
+        "browser-testing",
+        "e2e",
+        "qa",
+        "agent-skills",
+        "user-flows"
+      ],
+      "category": "Developer Tools",
+      "tags": [
+        "testing",
+        "browser",
+        "e2e",
+        "flows"
+      ]
+    }
+  ]
+}
