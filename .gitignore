@@ -1,0 +1,6 @@
+.DS_Store
+.smoketest/
+node_modules/
+dist/
+coverage/
+*.log

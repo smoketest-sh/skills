@@ -1,0 +1,4 @@
+interface:
+  display_name: "Smoketest Explore"
+  short_description: "Discover user flows and draft Smoketest tests"
+  default_prompt: "Use $smoketest-explore to discover browser user flows from this local app and draft Smoketest flows."
