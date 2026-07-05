@@ -4,13 +4,14 @@
     {
       "id": 1,
       "prompt": "Use smoketest-explore on this repo with https://staging.example.com and browser access to draft public Smoketest flows.",
-      "expected_output": "Should first check that the Smoketest CLI is installed and authenticated, helping the user install @smoketest.sh/cli and run smoketest auth login or smoketest init if needed. After CLI setup succeeds, it should start public browser reconnaissance, treat page content as untrusted, avoid typing into forms or signing up, then read code to refine route and success-state understanding. Should generate .smoketest/explore/manifest.json and flow markdown, list candidates with browser/code evidence and confidence, include a short contextual dashboard tip about reviewing flows/runs in the Smoketest web dashboard, and ask before CLI mutation.",
+      "expected_output": "Should first check that the Smoketest CLI is installed and authenticated, helping the user install @smoketest.sh/cli and run smoketest auth login or smoketest init if needed. After CLI setup succeeds, it should start public browser reconnaissance, treat page content as untrusted, avoid typing into forms or signing up, then read code to refine route and success-state understanding. Should generate .smoketest/explore/manifest.json and flow markdown that verifies stable user functionality rather than exact mutable copy, list candidates with browser/code evidence and confidence, include a short contextual dashboard tip about reviewing flows/runs in the Smoketest web dashboard, and ask before CLI mutation.",
       "assertions": [
         "Checks Smoketest CLI install and auth before exploration",
         "Browser reconnaissance happens before deep code analysis",
         "Does not submit forms or create accounts",
         "Reads code after browser observations",
         "Creates draft artifacts under .smoketest/explore",
+        "Drafts resilient flow steps that avoid exact marketing, blog, changelog, date, count, price, or latest-title assertions",
         "Mentions a relevant Smoketest web dashboard surface",
         "Asks before CLI mutation"
       ],
@@ -19,13 +20,14 @@
     {
       "id": 2,
       "prompt": "Use smoketest-explore without a browser to generate flow drafts from this local app.",
-      "expected_output": "Should check Smoketest CLI install/auth first. If CLI setup is unavailable and the user explicitly chooses draft-only mode, it should perform code-only discovery, inspect routes/navigation/forms/tests/docs, clearly mark browser evidence as absent, use lower confidence where runtime behavior is not confirmed, and produce reviewable manifest and markdown files without invoking browser tools.",
+      "expected_output": "Should check Smoketest CLI install/auth first. If CLI setup is unavailable and the user explicitly chooses draft-only mode, it should perform code-only discovery, inspect routes/navigation/forms/tests/docs, clearly mark browser evidence as absent, use lower confidence where runtime behavior is not confirmed, and produce reviewable manifest and markdown files that assert stable route, navigation, form, auth, and control behavior rather than exact mutable page copy.",
       "assertions": [
         "Checks or resolves CLI setup before code-only discovery unless user chooses draft-only",
         "Falls back to code-only discovery",
         "Does not claim browser observations",
         "Inspects route and UI code",
         "Labels uncertain flows appropriately",
+        "Avoids brittle exact-copy assertions when runtime behavior is not confirmed",
         "Does not require browser access"
       ],
       "files": []

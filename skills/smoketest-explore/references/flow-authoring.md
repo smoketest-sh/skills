@@ -8,6 +8,7 @@ Use this reference when drafting candidate Smoketest flows from browser and code
 - Prefer business-critical journeys over generic page checks.
 - Use browser evidence for what users actually see.
 - Use code evidence for route intent, auth boundaries, redirects, form names, success states, and hidden app areas.
+- Write smoke tests for stable user functionality, not mutable page copy. A good flow should keep passing when marketing headlines, blog titles, changelog entries, prices, dates, counts, or docs section names change without breaking the journey.
 - Do not fabricate observations. Mark uncertain inferences as `confidence: low`.
 - Do not include destructive actions unless the user explicitly authorizes a sandbox target.
 
@@ -100,7 +101,9 @@ Write short, direct markdown:
 
 - Open the homepage.
 - Use the main navigation to open pricing.
-- Verify the pricing page shows available plans and a primary signup or trial CTA.
+- Verify the pricing page loads and exposes plan or subscription options.
+- Follow a primary signup, trial, or get-started call to action.
+- Verify the public auth entry loads without entering credentials.
 ```
 
 Rules:
@@ -108,9 +111,36 @@ Rules:
 - Start with a clear heading.
 - Use sequential bullets.
 - End with a concrete observable outcome.
-- Reference visible UI text when it was observed.
+- Prefer stable capabilities over exact copy: navigation works, a list exists, an article opens, a form field is available, a non-destructive boundary is respected, an authenticated area requires login, or a CTA reaches the expected next step.
+- Reference exact visible UI text only for stable controls, form labels, durable nav items, or contractual product language. Avoid exact headlines, blog/changelog titles, dates, counts, prices, generated content, or other frequently edited copy.
+- For resource pages such as blog, changelog, docs, help, or release notes, select the first available item or a category/control by role and verify the destination loads with readable content; do not depend on a specific latest title or body copy.
 - Use variable names such as `TEST_USER_EMAIL`; never include secret values.
 - Keep each flow focused enough that failures are easy to diagnose.
+
+## Resilient Examples
+
+Prefer this:
+
+```markdown
+## Blog article navigation
+
+- Open the blog index.
+- Verify a list of published articles is visible.
+- Open the first available article without relying on a specific title.
+- Verify the article page loads with readable content.
+- Return to the blog index and verify the article list is still reachable.
+```
+
+Avoid this:
+
+```markdown
+## Blog latest article
+
+- Open the blog index.
+- Verify the page says `Our new launch headline`.
+- Open the latest article, `Exact Article Title`.
+- Verify the article explains a specific paragraph from today's post.
+```
 
 ## Public Flow Selection
 

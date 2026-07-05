@@ -2,4 +2,4 @@
 
 - Open the pricing page.
 - Switch pricing to annual billing.
-- Verify annual plan prices and the primary signup CTA are visible.
+- Verify the annual billing state is applied and a primary signup or checkout entry remains available.

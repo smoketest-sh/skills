@@ -30,7 +30,7 @@
         "browser": [],
         "code": [
           "apps/web/app/pricing/page.tsx added an annual billing toggle.",
-          "tests/e2e/pricing.spec.ts expects annual prices."
+          "tests/e2e/pricing.spec.ts expects annual billing mode to update the plan presentation."
         ]
       },
       "notes": []
