@@ -4,12 +4,13 @@
     {
       "id": 1,
       "prompt": "Use smoketest-changes to sync flows from this branch.",
-      "expected_output": "Should first check that the Smoketest CLI is installed and authenticated, helping the user install @smoketest.sh/cli and run smoketest auth login or smoketest init if needed. After CLI setup succeeds, it should inspect existing Smoketest projects, flows, subflows, and environments, collect git changes against origin/main or main plus working tree changes, inspect changed route/UI/test/doc files, draft .smoketest/changes/manifest.json and flow markdown, validate and dry-run the manifest, include a short contextual dashboard tip, and ask before CLI mutation.",
+      "expected_output": "Should first check that the Smoketest CLI is installed and authenticated, helping the user install @smoketest.sh/cli and run smoketest auth login or smoketest init if needed. After CLI setup succeeds, it should inspect existing Smoketest projects, flows, subflows, and environments, collect git changes against origin/main or main plus working tree changes, inspect changed route/UI/test/doc files, draft .smoketest/changes/manifest.json and flow markdown that verifies stable changed functionality rather than exact mutable copy, validate and dry-run the manifest, include a short contextual dashboard tip, and ask before CLI mutation.",
       "assertions": [
         "Checks Smoketest CLI install and auth before change analysis",
         "Uses branch diff against origin/main or main by default",
         "Includes staged, unstaged, and untracked relevant files",
         "Creates draft artifacts under .smoketest/changes",
+        "Drafts resilient flow steps that avoid exact marketing, blog, changelog, date, count, price, or latest-title assertions",
         "Validates and dry-runs before apply",
         "Mentions a relevant Smoketest web dashboard surface",
         "Asks before CLI mutation"
@@ -19,12 +20,13 @@
     {
       "id": 2,
       "prompt": "Use smoketest-changes for origin/main...HEAD and update existing Smoketest coverage.",
-      "expected_output": "Should use the explicit git range, inspect current Smoketest flows through the CLI, choose update only for exact-name matches, choose create for newly discovered journeys, skip near duplicates, and ask before applying any create/update actions.",
+      "expected_output": "Should use the explicit git range, inspect current Smoketest flows through the CLI, choose update only for exact-name matches, choose create for newly discovered journeys, skip near duplicates and content-only changes that do not affect durable user journeys, and ask before applying any create/update actions.",
       "assertions": [
         "Uses explicit git range",
         "Inspects existing Smoketest flows",
         "Uses exact-name matching for updates",
         "Avoids duplicate near matches",
+        "Skips or generalizes content-only changes instead of encoding exact page copy",
         "Requires approval before apply"
       ],
       "files": []

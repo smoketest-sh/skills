@@ -7,6 +7,7 @@ Use this reference when drafting candidate Smoketest flows from git and code evi
 - Draft one journey per flow.
 - Prefer changed business-critical journeys over generic page checks.
 - Use git/code evidence for route intent, auth boundaries, redirects, form names, success states, and changed behavior.
+- Write smoke tests for stable user functionality, not mutable page copy. A good flow should keep passing when marketing headlines, blog titles, changelog entries, prices, dates, counts, or docs section names change without breaking the journey.
 - Do not fabricate observations. Mark uncertain inferences as `confidence: low`.
 - Do not include destructive actions unless the user explicitly authorizes a sandbox target.
 - Treat deleted journeys as stale coverage to review, not as delete instructions.
@@ -100,7 +101,7 @@ Write short, direct markdown:
 
 - Open the pricing page.
 - Switch pricing to annual billing.
-- Verify annual plan prices and the primary signup CTA are visible.
+- Verify the annual billing state is applied and a primary signup or checkout entry remains available.
 ```
 
 Rules:
@@ -108,7 +109,9 @@ Rules:
 - Start with a clear heading.
 - Use sequential bullets.
 - End with a concrete observable outcome.
-- Reference visible UI text only when it is supported by code, docs, tests, or browser evidence.
+- Prefer stable capabilities over exact copy: navigation works, a list exists, an article opens, a form field is available, a non-destructive boundary is respected, an authenticated area requires login, or a changed control reaches the expected next step.
+- Reference exact visible UI text only for stable controls, form labels, durable nav items, or contractual product language. Avoid exact headlines, blog/changelog titles, dates, counts, prices, generated content, or other frequently edited copy, even when that copy appears in the diff.
+- For content-only diffs, usually choose `skip` unless the changed content affects a durable user journey or control. For resource pages such as blog, changelog, docs, help, or release notes, select the first available item or a category/control by role and verify the destination loads with readable content; do not depend on a specific latest title or body copy.
 - Use variable names such as `TEST_USER_EMAIL`; never include secret values.
 - Keep each flow focused enough that failures are easy to diagnose.
 

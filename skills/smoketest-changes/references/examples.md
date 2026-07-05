@@ -68,7 +68,7 @@ Example flow markdown:
 
 - {{smoketest-subflow:Log in}}
 - Open billing settings.
-- Verify invoice history and the download invoice action are visible.
+- Verify invoice history is reachable and a download invoice action is available.
 ```
 
 Example dashboard tip:
